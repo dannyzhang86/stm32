@@ -150,7 +150,7 @@ HAL_StatusTypeDef I2C_WRITE_ADDR16(I2C_HandleTypeDef *hi2c, uint16_t DevAddress_
 	aTxBuffer[1] = Address&0xff;
 	aTxBuffer[2] = Data&0xff;
 
-	CurStatus = HAL_I2C_Master_Transmit(&I2cHandle, (uint16_t)DevAddress_7bit, aTxBuffer, sizeof(aTxBuffer), 10000);
+	CurStatus = HAL_I2C_Master_Transmit_IT(&I2cHandle, (uint16_t)DevAddress_7bit, aTxBuffer, sizeof(aTxBuffer));
 	printf("I2C_WRITE_ADDR16 CurStatus1 = 0x%2X",CurStatus);
 	if(CurStatus != HAL_OK)
 	{
@@ -205,7 +205,7 @@ HAL_StatusTypeDef I2C_WRITE_ADDR8(I2C_HandleTypeDef *hi2c, uint16_t DevAddress_7
 	aTxBuffer[0] = Address&0xff;
 	aTxBuffer[1] = Data&0xff;
 
-	CurStatus = HAL_I2C_Master_Transmit(&I2cHandle, (uint16_t)DevAddress_7bit, aTxBuffer, sizeof(aTxBuffer), 10000);
+	CurStatus = HAL_I2C_Master_Transmit_IT(&I2cHandle, (uint16_t)DevAddress_7bit, aTxBuffer, sizeof(aTxBuffer));
 	printf("I2C_WRITE_ADDR8 CurStatus1 = 0x%2X",CurStatus);
 	if(CurStatus != HAL_OK)
 	{
@@ -263,7 +263,7 @@ uint8_t I2C_READ_ADDR16(I2C_HandleTypeDef *hi2c, uint16_t DevAddress_7bit, uint1
 	uint8_t aRxBuffer[1];
 	memset(aRxBuffer, 0, 1);
 	
-	CurStatus = HAL_I2C_Master_Transmit(&I2cHandle,  DevAddress_7bit&0xff, aTxBuffer, sizeof(Address), 10000);
+	CurStatus = HAL_I2C_Master_Transmit_IT(&I2cHandle, (uint16_t)DevAddress_7bit, aTxBuffer, sizeof(aTxBuffer));
 	printf("I2C_READ_ADDR16 CurStatus1 = 0x%2X",CurStatus);
 	if(CurStatus != HAL_OK)
 	{
@@ -309,7 +309,7 @@ uint8_t I2C_READ_ADDR16(I2C_HandleTypeDef *hi2c, uint16_t DevAddress_7bit, uint1
 		}
 	}
 
-	CurStatus = HAL_I2C_Master_Receive(&I2cHandle,  DevAddress_7bit&0xff, aRxBuffer, sizeof(aRxBuffer), 10000);
+	CurStatus = HAL_I2C_Master_Receive_IT(&I2cHandle,  DevAddress_7bit&0xff, aRxBuffer, sizeof(aRxBuffer));
 	printf("READ CurStatus1 = 0x%2X",CurStatus);
 	if(CurStatus != HAL_OK)
 	{
@@ -365,7 +365,7 @@ uint8_t I2C_READ_ADDR8(I2C_HandleTypeDef *hi2c, uint16_t DevAddress_7bit, uint8_
 	uint8_t aRxBuffer[1];
 	memset(aRxBuffer, 0, 1);
 	
-	CurStatus = HAL_I2C_Master_Transmit(&I2cHandle,  DevAddress_7bit&0xff, aTxBuffer, sizeof(aTxBuffer), 10000);
+	CurStatus = HAL_I2C_Master_Transmit_IT(&I2cHandle,  DevAddress_7bit&0xff, aTxBuffer, sizeof(aTxBuffer));
 	printf("I2C_READ_ADDR8_WRITE CurStatus1 = 0x%2X",CurStatus);
 	if(CurStatus != HAL_OK)
 	{
@@ -411,7 +411,7 @@ uint8_t I2C_READ_ADDR8(I2C_HandleTypeDef *hi2c, uint16_t DevAddress_7bit, uint8_
 		}
 	}
 
-	CurStatus = HAL_I2C_Master_Receive(&I2cHandle, DevAddress_7bit&0xff, aRxBuffer, sizeof(aRxBuffer), 10000);
+	CurStatus = HAL_I2C_Master_Receive_IT(&I2cHandle, DevAddress_7bit&0xff, aRxBuffer, sizeof(aRxBuffer));
 	printf("READ CurStatus1 = 0x%2X",CurStatus);
 	if(CurStatus != HAL_OK)
 	{
